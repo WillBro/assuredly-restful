@@ -6,14 +6,15 @@ import org.inferred.freebuilder.FreeBuilder;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 
 @FreeBuilder
 public interface Person {
-    String getFirstname();
+    String getFirstName();
 
-    String getMiddleName();
+    Optional<String> getMiddleName();
 
-    String getLastname();
+    String getLastName();
 
     String getGender();
 
@@ -29,8 +30,8 @@ public interface Person {
      */
     class Builder extends Person_Builder {
         public Builder() {
-            setFirstname("Another");
-            setLastname("Test User");
+            setFirstName("This is a ");
+            setLastName("Test User");
         }
     }
 
@@ -44,9 +45,9 @@ public interface Person {
         public FakeBuilder() {
             super();
 
-            setFirstname(fakePerson.getFirstName());
+            setFirstName(fakePerson.getFirstName());
             setMiddleName(fakePerson.getMiddleName());
-            setLastname(fakePerson.getLastName());
+            setLastName(fakePerson.getLastName());
             setDateOfBirth(fakePerson.getDateOfBirth().toDate());
         }
     }
