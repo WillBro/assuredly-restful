@@ -1,5 +1,6 @@
 package uk.co.trycatchfinallysoftware.data;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -54,6 +55,8 @@ public class PersonTest {
     public void testFakerBuilder() {
         Person fakePerson = new Person.FakeBuilder()
                 .buildPartial();
+        // Partials are objects which would normally fail validation
+        // they are useful during testing
 
         assertPerson(fakePerson); // Same assertion as Person
     }
@@ -83,8 +86,26 @@ public class PersonTest {
             expected = AssertionError.class
     )
     public void testImposterVentura() {
-        FakeVentura imposterVentura = new FakeVentura.Builder()
-                .mapFirstName(firstname -> "Bob")
+        Calendar releaseDateCal = Calendar.getInstance();
+        releaseDateCal.set(1994, 1, 4);
+
+        FakeVentura aceVentura = new FakeVentura.Builder()
+                .setGender("Male")
+                .setDateOfBirth(releaseDateCal.getTime())
+                .buildPartial();
+
+        // Purpose of mapper is changing already existing values
+        FakeVentura imposterVentura = aceVentura.toBuilder()
+                .mapDateOfBirth(date -> {
+                    // Example of mapping?
+                    Calendar imposterCal = Calendar.getInstance();
+                    imposterCal.setTime(date);
+                    imposterCal.set(Calendar.YEAR, 2001);
+
+                    return imposterCal.getTime();
+                })
+                .setFirstName("Bob")
+                .setJob("Painter and Decorator")
                 .buildPartial();
 
         assertFakeVentura(imposterVentura);
@@ -100,6 +121,5 @@ public class PersonTest {
         assertThat(fakeVentura.getLastName(), is("Ventura"));
         assertThat(fakeVentura.getJob(), is("Pet Detective"));
         assertThat(fakeVentura.getMiddleName(), is(Optional.empty()));
-
     }
 }
