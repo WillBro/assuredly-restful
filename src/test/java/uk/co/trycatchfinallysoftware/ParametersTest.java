@@ -1,4 +1,4 @@
-package trycatchfinallysoftware;
+package uk.co.trycatchfinallysoftware;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
