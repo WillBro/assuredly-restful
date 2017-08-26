@@ -1,10 +1,14 @@
 package uk.co.trycatchfinallysoftware;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
+@EnableAutoConfiguration
 @SpringBootApplication(scanBasePackages = {
-        "uk.co.trycatchfinally"
+        "uk.co.trycatchfinallysoftware"
 })
 public class TestApplication {
     public void main(String[] args) {
