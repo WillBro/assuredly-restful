@@ -2,8 +2,13 @@ package uk.co.trycatchfinallysoftware.data;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import uk.co.trycatchfinallysoftware.LifeCycleLoggerListener;
 import uk.co.trycatchfinallysoftware.TestApplication;
 
 import java.util.Calendar;
@@ -19,11 +24,24 @@ import static org.hamcrest.Matchers.*;
         }
 )
 @RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners(
+        listeners = {
+                LifeCycleLoggerListener.class
+        },
+        mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
+)
 public class PersonTest {
+
+    private final Logger Logger = LoggerFactory.getLogger(getClass());
+
+    public org.slf4j.Logger getLogger() {
+        return Logger;
+    }
+
     @Test
     public void testPersonBuilder() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(1984, 12, 10);
+        calendar.set(1984, 11, 10); // 0 Indexed month
 
         Person person = new Person.Builder()
                 .setDateOfBirth(calendar.getTime())
@@ -39,6 +57,8 @@ public class PersonTest {
      * @param person Person
      */
     private void assertPerson(Person person) {
+        getLogger().info("Asserting: {}", person); // Using Logger to help us debug test failures with object.toString()
+
         assertThat(person, instanceOf(Person.class));
         assertThat(person.getFirstName(), not(isEmptyString()));
         assertThat(person.getLastName().length(), lessThanOrEqualTo(100));
@@ -71,8 +91,6 @@ public class PersonTest {
                 .buildPartial();
 
         assertFakeVentura(fakeVentura);
-
-        System.out.println(fakeVentura); // Simple output of properties
     }
 
     /**
@@ -116,6 +134,8 @@ public class PersonTest {
      * @param fakeVentura FakeVentura
      */
     public void assertFakeVentura(FakeVentura fakeVentura) {
+        getLogger().info("Asserting: {}", fakeVentura);
+
         assertThat(fakeVentura.getFirstName(), is("Ace"));
         assertThat(fakeVentura.getLastName(), is("Ventura"));
         assertThat(fakeVentura.getJob(), is("Pet Detective"));

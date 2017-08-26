@@ -30,8 +30,8 @@ public interface Person {
      */
     class Builder extends Person_Builder {
         public Builder() {
-            setFirstName("This is a ");
-            setLastName("Test User");
+            setFirstName("Test");
+            setLastName("User");
         }
     }
 
@@ -39,7 +39,7 @@ public interface Person {
         protected static Fairy fairy = Fairy.create(Locale.UK);
         protected static io.codearte.jfairy.producer.person.Person fakePerson = fairy.person(
                 PersonProperties.ageBetween(16, 70),
-                PersonProperties.withMiddleName("Ventura")
+                PersonProperties.withMiddleName("TEST-ACCOUNT")
         );
 
         public FakeBuilder() {
