@@ -1,13 +1,11 @@
 package uk.co.trycatchfinallysoftware.data;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.co.trycatchfinallysoftware.TestApplication;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -29,6 +27,7 @@ public class PersonTest {
 
         Person person = new Person.Builder()
                 .setDateOfBirth(calendar.getTime())
+                .setGender("Male")
                 .build();
 
         assertPerson(person);
