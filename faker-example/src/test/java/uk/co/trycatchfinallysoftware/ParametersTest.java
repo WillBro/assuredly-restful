@@ -18,8 +18,8 @@ import static io.restassured.RestAssured.*;
 public class ParametersTest {
     @BeforeClass
     public static void setBaseUriAndPath() {
-        RestAssured.basePath = "/";
-        RestAssured.baseURI = "http://www.google.co.uk";
+        basePath = "/";
+        baseURI = "http://www.google.co.uk";
     }
 
     /**

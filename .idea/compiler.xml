@@ -9,12 +9,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="assuredly-restful" />
+        <module name="faker-example" />
         <module name="rest-assured-get-parameter-builder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="assuredly-restful" target="1.8" />
+      <module name="faker-example" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

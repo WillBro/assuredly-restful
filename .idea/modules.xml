@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/assuredly-restful.iml" filepath="$PROJECT_DIR$/assuredly-restful.iml" />
+      <module fileurl="file://$PROJECT_DIR$/faker-example/faker-example.iml" filepath="$PROJECT_DIR$/faker-example/faker-example.iml" />
     </modules>
   </component>
 </project>
